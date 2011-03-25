@@ -1,0 +1,201 @@
+  <div id="contentPane">
+
+        <h1>
+          1.&nbsp;&nbsp;Numbers
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                Now that you've gotten everything <a href="/LearnToProgram/?Chapter=00">setup</a>,
+      let's write a program!  Open up your favorite text
+      editor and type in the following:
+
+        </p>
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">1</span>+<span class="L2Pnumber">2</span></pre>
+
+        <p>
+                Save your program (yes, that's a program!) as <span class="L2Pinput">calc.rb</span>
+      (the <strong>.rb</strong> is what we usually put at the end of
+      programs written in Ruby).  Now run your program by typing <span class="L2Pinput">ruby&nbsp;calc.rb</span>
+      into your command line.  It should have put a <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">3</span> on your screen.
+      See, programming isn't so hard, now is it?
+
+        </p>
+
+        <h2>
+          Introduction to <span class="L2Pcode">puts</span>
+        </h2>
+        <p>
+                So what's going on in that program?  I'm sure you can guess what the
+      <span class="L2Pcode"><span class="L2Pnumber">1</span>+<span class="L2Pnumber">2</span></span> does; our program is basically the same as:
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">3</span></pre>
+        <p>
+                <span class="L2Pcode">puts</span> simply writes onto the screen whatever comes after it.
+
+        </p>
+        <h2>
+          Integer and Float
+        </h2>
+        <p>
+
+                In most programming languages (and Ruby is no exception)
+      numbers without decimal points are called <dfn>integers</dfn>, and
+      numbers with decimal points are usually called
+      <dfn>floating-point numbers</dfn>,
+      or more simply, <dfn>floats</dfn>.
+
+        </p>
+        <p>
+                Here are some integers:
+
+        </p>
+        <pre class="L2PcodeBlock"><span class="L2Pnumber">5</span>
+
+-<span class="L2Pnumber">205</span>
+<span class="L2Pnumber">9999999999999999999999999</span>
+<span class="L2Pnumber">0</span></pre>
+        <p>
+                And here are some floats:
+
+        </p>
+        <pre class="L2PcodeBlock"><span class="L2Pnumber">54.321</span>
+<span class="L2Pnumber">0.001</span>
+
+-<span class="L2Pnumber">205.3884</span>
+<span class="L2Pnumber">0.0</span></pre>
+        <p>
+                In practice, most programs don't use floats; only integers.
+      (After all, no one wants to look at 7.4 emails, or browse 1.8
+      webpages, or listen to 5.24 of their favorite songs...)
+      Floats are used more for academic purposes (physics experiments and such)
+      and for 3D graphics.  Even most money programs use integers; they just
+      keep track of the number of pennies!
+
+        </p>
+        <h2>
+          Simple Arithmetic
+        </h2>
+        <p>
+
+                So far, we've got all the makings of a simple calculator.
+      (Calculators always use floats, so if you want your computer
+      to act just like a calculator, you should also use floats.)  For addition
+      and subtraction, we use <kbd>+</kbd> and <kbd>-</kbd>,
+      as we saw.  For multiplication, we use <kbd>*</kbd>,
+      and for division we use <kbd>/</kbd>.  Most keyboards have
+      these keys in the numeric keypad on the far right side.
+      If you have a smaller keyboard or a laptop, though, you can just use
+      <kbd>Shift 8</kbd> and <kbd>/</kbd> (same key as the
+      <kbd>?</kbd> key).  Let's try to expand our calc.rb program a little.
+      Type in the following and then run it.
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">1.0</span> + <span class="L2Pnumber">2.0</span>
+puts <span class="L2Pnumber">2.0</span> * <span class="L2Pnumber">3.0</span>
+puts <span class="L2Pnumber">5.0</span> - <span class="L2Pnumber">8.0</span>
+
+puts <span class="L2Pnumber">9.0</span> / <span class="L2Pnumber">2.0</span></pre>
+        <p>This is what the program returns:</p>
+        <pre class="L2PoutputBlock">
+3.0
+6.0
+-3.0
+4.5
+</pre>
+        <p>
+                (The spaces in the program are not important; they just make
+      the code easier to read.)  Well, that wasn't too surprising.
+      Now let's try it with integers:
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">1</span>+<span class="L2Pnumber">2</span>
+puts <span class="L2Pnumber">2</span>*<span class="L2Pnumber">3</span>
+puts <span class="L2Pnumber">5</span>-<span class="L2Pnumber">8</span>
+puts <span class="L2Pnumber">9</span>/<span class="L2Pnumber">2</span></pre>
+
+        <p>Mostly the same, right?</p>
+        <pre class="L2PoutputBlock">
+3
+6
+-3
+4
+</pre>
+        <p>
+                Uh... except for that last one!
+      But when you do arithmetic with integers, you'll get integer answers.
+      When your computer can't get the "right" answer, it always rounds down.
+      (Of course, <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">4</span> <em>is</em> the right answer in integer arithmetic
+      for <span class="L2Pcode"><span class="L2Pnumber">9</span>/<span class="L2Pnumber">2</span></span>; just maybe not the answer you were expecting.)
+
+        </p>
+
+        <p>
+                Perhaps you're wondering what integer division is good for.  Well, let's
+      say you're going to the movies, but you only have $9.  Here in
+      Portland, you can see a movie at the Bagdad for 2 bucks.  How many movies
+      can you see there?  <span class="L2Pcode"><span class="L2Pnumber">9</span>/<span class="L2Pnumber">2</span></span>... <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">4</span> movies.  4.5
+      is definitely <em>not</em> the right answer in this case; they will
+      not let you watch half of a movie, or let half of you in to
+      see a whole movie... some things just aren't divisible.
+
+        </p>
+        <p>
+
+                So now experiment with some programs of your own!  If you want
+      to write more complex expressions, you can use parentheses.
+      For example:
+
+        </p>
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">5</span> * (<span class="L2Pnumber">12</span>-<span class="L2Pnumber">8</span>) + -<span class="L2Pnumber">15</span>
+puts <span class="L2Pnumber">98</span> + (<span class="L2Pnumber">59872</span> / (<span class="L2Pnumber">13</span>*<span class="L2Pnumber">8</span>)) * -<span class="L2Pnumber">52</span></pre>
+
+        <pre class="L2PoutputBlock">
+5
+-29802
+</pre>
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+          Write a program which tells you:
+        </p>
+        <ul>
+          <li>
+
+            how many hours are in a year?
+          </li>
+          <li>
+            how many minutes are in a decade?
+          </li>
+          <li>
+            how many seconds old are you?
+          </li>
+          <li>
+            how many chocolates do you hope to eat in your life? <br /><em><strong>Warning:</strong>  This part of the program could take a while to compute!</em>
+
+          </li>
+        </ul>
+        <p>
+          Here's a tougher question:
+        </p>
+        <ul>
+          <li>
+            If I am 1031 million seconds old, how old am I?
+          </li>
+        </ul>
+
+        <p>
+                When you're done playing around with numbers, let's have a look
+      at some <a href="/LearnToProgram/?Chapter=02">letters</a>.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p style="padding-bottom: 20px;">
+          &copy; 2003-2009 Chris Pine
+        </p>
+      </div>
+

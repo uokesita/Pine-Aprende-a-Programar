@@ -1,0 +1,285 @@
+      <div id="contentPane">
+
+        <h1>
+          4.&nbsp;&nbsp;Mixing It Up
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                We've looked at a few different kinds of objects
+      (<a href="/LearnToProgram/?Chapter=01">numbers</a> and <a href="/LearnToProgram/?Chapter=02">letters</a>),
+      and we made <a href="/LearnToProgram/?Chapter=03">variables</a> to point to them;
+      the next thing we want to do is to get them all to play nicely together.
+
+        </p>
+
+        <p>
+                We've seen that if we want a program to print <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">25</span>, the following
+      <em>does <strong>not</strong></em> work, because you can't add
+      numbers and strings:
+
+        </p>
+        <pre class="L2PcodeBlock">var1 = <span class="L2Pnumber">2</span>
+var2 = '<span class="L2Pstring">5</span>'
+
+puts var1 + var2</pre>
+
+        <p>
+                Part of the problem is that your computer doesn't know if you
+      were trying to get <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">7</span> (<span class="L2Pcode"><span class="L2Pnumber">2</span>&nbsp;+&nbsp;<span class="L2Pnumber">5</span></span>), or if you wanted
+      to get <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">25</span> (<span class="L2Pcode">'<span class="L2Pstring">2</span>'&nbsp;+&nbsp;'<span class="L2Pstring">5</span>'</span>).
+
+        </p>
+
+        <p>
+                Before we can add these together, we need some way of getting the
+      string version of <span class="L2Pcode">var1</span>, or to get the integer version
+      of <span class="L2Pcode">var2</span>.
+
+        </p>
+        <h2>
+          Conversions
+        </h2>
+        <p>
+                To get the string version of an object, we simply write
+      <span class="L2Pcode">.to_s</span> after it:
+
+        </p>
+
+        <pre class="L2PcodeBlock">var1 = <span class="L2Pnumber">2</span>
+var2 = '<span class="L2Pstring">5</span>'
+
+puts var1.to_s + var2</pre>
+        <pre class="L2PoutputBlock">
+25
+</pre>
+        <p>
+                Similarly, <span class="L2Pcode">to_i</span> gives the integer version of an object,
+      and <span class="L2Pcode">to_f</span> gives the float version.  Let's look at what
+      these three methods do (and <em>don't</em> do) a little more closely:
+
+        </p>
+
+        <pre class="L2PcodeBlock">var1 = <span class="L2Pnumber">2</span>
+var2 = '<span class="L2Pstring">5</span>'
+
+puts var1.to_s + var2
+puts var1 + var2.to_i</pre>
+        <pre class="L2PoutputBlock">
+25
+7
+</pre>
+        <p>
+                Notice that, even after we got the string version of
+      <span class="L2Pcode">var1</span> by calling <span class="L2Pcode">to_s</span>, <span class="L2Pcode">var1</span> was always pointing
+      at <span class="L2Pcode"><span class="L2Pnumber">2</span></span>, and never at <span class="L2Pcode">'<span class="L2Pstring">2</span>'</span>.  Unless we explicitly reassign
+      <span class="L2Pcode">var1</span> (which requires an <span class="L2Pcode">=</span> sign), it will point
+      at <span class="L2Pcode"><span class="L2Pnumber">2</span></span> for the life of the program.
+
+        </p>
+
+        <p>
+                Now let's try some more interesting (and a few just weird) conversions:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">15</span>'.to_f
+puts '<span class="L2Pstring">99.999</span>'.to_f
+puts '<span class="L2Pstring">99.999</span>'.to_i
+puts '<span class="L2Pstring"></span>'
+puts '<span class="L2Pstring">5 is my favorite number!</span>'.to_i
+puts '<span class="L2Pstring">Who asked you about 5 or whatever?</span>'.to_i
+puts '<span class="L2Pstring">Your momma did.</span>'.to_f
+puts '<span class="L2Pstring"></span>'
+puts '<span class="L2Pstring">stringy</span>'.to_s
+puts <span class="L2Pnumber">3</span>.to_i</pre>
+
+        <pre class="L2PoutputBlock">
+15.0
+99.999
+99
+
+5
+0
+0.0
+
+stringy
+3
+</pre>
+        <p>
+                So, this probably gave some surprises.  The first one is pretty
+      standard, giving <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">15.0</span>.
+      After that, we converted the string <span class="L2Pcode">'<span class="L2Pstring">99.999</span>'</span> to a float and
+      to an integer.  The float did what we expected; the integer was, as always, rounded down.
+
+        </p>
+        <p>
+
+                Next, we had some examples of some... <em>unusual</em> strings being converted
+      into numbers.  <span class="L2Pcode">to_i</span> ignores the first thing it doesn't understand,
+      and the rest of the string from that point on.  So the first one
+      was converted to <span class="L2Pcode"><span class="L2Pnumber">5</span></span>, but the others, since they started with
+      letters, were ignored completely... so the computer just picks zero.
+
+        </p>
+        <p>
+                Finally, we saw that our last two conversions did nothing at all,
+      just as we would expect.
+
+        </p>
+        <h2>
+
+          Another Look at <span class="L2Pcode">puts</span>
+        </h2>
+        <p>
+                There's something strange about our favorite method...  Take a look at this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">20</span>
+puts <span class="L2Pnumber">20</span>.to_s
+puts '<span class="L2Pstring">20</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+20
+20
+20
+</pre>
+        <p>
+                Why do these three all print the same thing?  Well, the last two
+      should, since <span class="L2Pcode"><span class="L2Pnumber">20</span>.to_s</span> <em>is</em> <span class="L2Pcode">'<span class="L2Pstring">20</span>'</span>.  But what
+      about the first one, the integer <span class="L2Pcode"><span class="L2Pnumber">20</span></span>?  For that matter, what
+      does it even mean to write out <em>the integer</em> 20?  When
+      you write a <em>2</em> and then a <em>0</em> on a piece of paper, you
+      are writing down a string, not an integer.  <em>The integer</em> 20 is the number of
+      fingers and toes I have; it isn't a <em>2</em> followed by a <em>0</em>.
+
+        </p>
+
+        <p>
+                Well, here's the big secret behind our friend, <span class="L2Pcode">puts</span>:  Before
+      <span class="L2Pcode">puts</span> tries to write out an object, it uses <span class="L2Pcode">to_s</span> to
+      get the string version of that object.  In fact, the <em>s</em> in
+      <span class="L2Pcode">puts</span> stands for <em>string</em>; <span class="L2Pcode">puts</span> really means
+      <dfn>put string</dfn>.
+
+        </p>
+
+        <p>
+                This may not seem too exciting now, but there are many,
+      <em>many</em> kinds of objects in Ruby (you'll even learn how
+      to make your own!), and it's nice to know what will happen if
+      you try to <span class="L2Pcode">puts</span> a really weird object,
+      like a picture of your grandmother, or a music file or something.
+      But that will come later...
+
+        </p>
+        <p>
+                In the meantime, we have a few more methods for you, and they
+      allow us to write all sorts of fun programs...
+
+        </p>
+        <h2>
+
+          The Methods <span class="L2Pcode">gets</span> and <span class="L2Pcode">chomp</span>
+        </h2>
+        <p>
+                If <span class="L2Pcode">puts</span> means <dfn>put string</dfn>, I'm sure you can guess
+      what <span class="L2Pcode">gets</span> stands for.  And just as <span class="L2Pcode">puts</span> always
+      spits out strings, <span class="L2Pcode">gets</span> will only retrieve strings.  And
+      whence does it get them?
+
+        </p>
+
+        <p>
+                From you!  Well, from your keyboard, anyway.  Since your keyboard only
+      makes strings, that works out beautifully.  What actually happens
+      is that <span class="L2Pcode">gets</span> just sits there, reading what you type until
+      you press <kbd>Enter</kbd>.  Let's try it out:
+
+        </p>
+        <pre class="L2PcodeBlock">puts gets</pre>
+        <pre class="L2PoutputBlock">
+<span class="L2Pinput">Is there an echo in here?</span>
+
+Is there an echo in here?
+</pre>
+        <p>
+                Of course, whatever you type in will just get repeated back
+      to you.  Run it a few times and try typing in different things.
+
+        </p>
+        <p>
+                Now we can make interactive programs!  In this one, type in
+      your name and it will greet you:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello there, and what\'s your name?</span>'
+name = gets
+puts '<span class="L2Pstring">Your name is </span>' + name + '<span class="L2Pstring">?  What a lovely name!</span>'
+puts '<span class="L2Pstring">Pleased to meet you, </span>' + name + '<span class="L2Pstring">.  :)</span>'</pre>
+
+        <p><em>Eek!</em>  I just ran it&mdash;I typed in my name, and this is what happened:</p>
+        <pre class="L2PoutputBlock">
+Hello there, and what's your name?
+<span class="L2Pinput">Chris</span>
+Your name is Chris
+?  What a lovely name!
+Pleased to meet you, Chris
+.  :)
+</pre>
+        <p>
+                Hmmm... it looks like when I typed in the letters <kbd>C</kbd>,
+      <kbd>h</kbd>, <kbd>r</kbd>, <kbd>i</kbd>,
+      <kbd>s</kbd>, and then pressed <kbd>Enter</kbd>, <span class="L2Pcode">gets</span>
+
+      got all of the letters in my name <em>and</em> the
+      <kbd>Enter</kbd>!  Fortunately, there's a method just for
+      this sort of thing:  <span class="L2Pcode">chomp</span>.  It takes off any <kbd>Enter</kbd>s
+      hanging out at the end of your string.  Let's try that program again,
+      but with <span class="L2Pcode">chomp</span> to help us this time:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello there, and what\'s your name?</span>'
+name = gets.chomp
+puts '<span class="L2Pstring">Your name is </span>' + name + '<span class="L2Pstring">?  What a lovely name!</span>'
+puts '<span class="L2Pstring">Pleased to meet you, </span>' + name + '<span class="L2Pstring">.  :)</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+Hello there, and what's your name?
+<span class="L2Pinput">Chris</span>
+Your name is Chris?  What a lovely name!
+Pleased to meet you, Chris.  :)
+</pre>
+        <p>
+                Much better!  Notice that since <span class="L2Pcode">name</span> is pointing to
+      <span class="L2Pcode">gets.chomp</span>, we don't ever have to say
+      <span class="L2Pcode">name.chomp</span>;  <span class="L2Pcode">name</span> was already
+      <span class="L2Pcode">chomp</span>ed.
+
+        </p>
+
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+                &bull; Write a program which asks for a person's first name, then middle,
+      then last.  Finally, it should greet the person using their full name.
+
+        </p>
+        <p>
+                &bull; Write a program which asks for a person's favorite number.
+      Have your program add one to the number, then suggest the result
+      as a <em>bigger and better</em> favorite number.
+      (Do be tactful about it, though.)
+
+        </p>
+
+        <p>
+                Once you have finished those two programs (and any others you would like to try),
+      let's learn some more (and some more about) <a href="/LearnToProgram/?Chapter=05">methods</a>.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p style="padding-bottom: 20px;">
+          &copy; 2003-2009 Chris Pine
+        </p>
+      </div>
+

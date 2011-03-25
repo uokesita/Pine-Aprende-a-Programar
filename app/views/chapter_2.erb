@@ -1,0 +1,241 @@
+      <div id="contentPane">
+
+        <h1>
+          2.&nbsp;&nbsp;Letters
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                So we've learned all about <a href="/LearnToProgram/?Chapter=01">numbers</a>,
+      but what about letters?  words?  text?
+
+        </p>
+        <p>
+
+                We refer to groups of letters in a program as <dfn>strings</dfn>.  (You can
+      think of printed letters being strung together on a banner.)
+      To make it easier to see just what part of the code is in a string,
+      I'll color strings
+      <span class="L2Pcode"><span class="L2Pstring">red</span></span>.
+      Here are some strings:
+
+        </p>
+        <pre class="L2PcodeBlock">'<span class="L2Pstring">Hello.</span>'
+'<span class="L2Pstring">Ruby rocks.</span>'
+'<span class="L2Pstring">5 is my favorite number... what is yours?</span>'
+'<span class="L2Pstring">Snoopy says #%^?&amp;*@! when he stubs his toe.</span>'
+'<span class="L2Pstring">     </span>'
+'<span class="L2Pstring"></span>'</pre>
+
+        <p>
+                As you can see, strings can have punctuation, digits, symbols,
+      and spaces in them... more than just letters.  That last string
+      doesn't have anything in it at all; we would call that an
+      <dfn>empty string</dfn>.
+
+        </p>
+        <p>
+                We have been using <span class="L2Pcode">puts</span> to print numbers;
+      let's try it with some strings:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, world!</span>'
+puts '<span class="L2Pstring"></span>'
+puts '<span class="L2Pstring">Good-bye.</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+Hello, world!
+
+Good-bye.
+</pre>
+        <p>
+                That worked out well.  Now try some strings of your own.
+
+        </p>
+        <h2>
+          String Arithmetic
+        </h2>
+        <p>
+                Just as you can do arithmetic on numbers, you can also do
+      arithmetic on strings!  Well, sort of... you can add strings, anyway.
+      Let's try to add two strings and see what
+      <span class="L2Pcode">puts</span> does with that.
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">I like</span>' + '<span class="L2Pstring">apple pie.</span>'</pre>
+        <pre class="L2PoutputBlock">
+I likeapple pie.
+</pre>
+        <p>
+                Whoops!  I forgot to put a space between <span class="L2Pcode">'<span class="L2Pstring">I&nbsp;like</span>'</span> and <span class="L2Pcode">'<span class="L2Pstring">apple&nbsp;pie.</span>'</span>.
+      Spaces don't matter usually, but they matter inside strings.
+      (It's true what they say:  computers don't do what you <em>want</em>
+
+      them to do, only what you <em>tell</em> them to do.)  Let's try that again:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">I like </span>' + '<span class="L2Pstring">apple pie.</span>'
+puts '<span class="L2Pstring">I like</span>' + '<span class="L2Pstring"> apple pie.</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+I like apple pie.
+I like apple pie.
+</pre>
+        <p>
+                (As you can see, it didn't matter which string I added the space to.)
+
+        </p>
+        <p>
+                So you can add strings, but you can also multiply them!
+      (By a number, anyway.)  Watch this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">blink </span>' * <span class="L2Pnumber">4</span></pre>
+
+        <pre class="L2PoutputBlock">batting her eyes</pre>
+        <p>(Just kidding... it really does this:)</p>
+        <pre class="L2PoutputBlock">
+blink blink blink blink 
+</pre>
+        <p>
+                If you think about it, this makes perfect sense.  After all,
+      <span class="L2Pcode"><span class="L2Pnumber">7</span>*<span class="L2Pnumber">3</span></span> really just means <span class="L2Pcode"><span class="L2Pnumber">7</span>+<span class="L2Pnumber">7</span>+<span class="L2Pnumber">7</span></span>, so <span class="L2Pcode">'<span class="L2Pstring">moo</span>'*<span class="L2Pnumber">3</span></span> just
+      means <span class="L2Pcode">'<span class="L2Pstring">moo</span>'+'<span class="L2Pstring">moo</span>'+'<span class="L2Pstring">moo</span>'</span>.
+
+        </p>
+
+        <h2>
+          <span class="L2Pcode"><span class="L2Pnumber">12</span></span> vs <span class="L2Pcode">'<span class="L2Pstring">12</span>'</span>
+        </h2>
+        <p>
+                Before we get any further, we should make sure we understand the
+      difference between <em>numbers</em> and <em>digits</em>.
+      <span class="L2Pcode"><span class="L2Pnumber">12</span></span> is a number, but <span class="L2Pcode">'<span class="L2Pstring">12</span>'</span> is a string of two digits.
+
+        </p>
+
+        <p>
+                Let's play around with this for a while:
+
+        </p>
+        <pre class="L2PcodeBlock">puts  <span class="L2Pnumber">12</span>  +  <span class="L2Pnumber">12</span>
+puts '<span class="L2Pstring">12</span>' + '<span class="L2Pstring">12</span>'
+puts '<span class="L2Pstring">12  +  12</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+24
+1212
+12  +  12
+</pre>
+        <p>
+                How about this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts  <span class="L2Pnumber">2</span>  *  <span class="L2Pnumber">5</span>
+puts '<span class="L2Pstring">2</span>' *  <span class="L2Pnumber">5</span>
+
+puts '<span class="L2Pstring">2  *  5</span>'</pre>
+        <pre class="L2PoutputBlock">
+10
+22222
+2  *  5
+</pre>
+        <p>
+                These examples were pretty straightforward.  However, if you're not too
+      careful with how you mix your strings and your numbers, you might run into...
+
+        </p>
+        <h2>
+          Problems
+        </h2>
+
+        <p>
+                At this point you may have tried out a few things which
+      <em>didn't</em> work.  If not, here are a few:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">12</span>' + <span class="L2Pnumber">12</span>
+puts '<span class="L2Pstring">2</span>' * '<span class="L2Pstring">5</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+#&lt;TypeError: can't convert Fixnum into String&gt;
+</pre>
+        <p>
+                Hmmm... an error message.  The problem is that you
+      can't really add a number to a string, or multiply a
+      string by another string.  It doesn't make any more sense than does this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Betty</span>' + <span class="L2Pnumber">12</span>
+
+puts '<span class="L2Pstring">Fred</span>' * '<span class="L2Pstring">John</span>'</pre>
+        <p>
+                Something else to be aware of:  you can write <span class="L2Pcode">'<span class="L2Pstring">pig</span>'*<span class="L2Pnumber">5</span></span> in a program,
+      since it just means <span class="L2Pcode"><span class="L2Pnumber">5</span></span> sets of the string <span class="L2Pcode">'<span class="L2Pstring">pig</span>'</span> all added
+      together.  However,
+      you <em>can't</em> write <span class="L2Pcode"><span class="L2Pnumber">5</span>*'<span class="L2Pstring">pig</span>'</span>, since that means <span class="L2Pcode">'<span class="L2Pstring">pig</span>'</span>
+
+      sets of the number <span class="L2Pcode"><span class="L2Pnumber">5</span></span>, which is just silly.
+
+        </p>
+        <p>
+                Finally, what if I want a program to print out
+      <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">You're&nbsp;swell!</span>?  We can try this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">You</span>'re swell!'</pre>
+
+        <p>
+                Well, <em>that</em> won't work; I won't even try to run it.
+      The computer thought we were done with the string.
+      (This is why it's nice to have a text editor which does
+      <dfn>syntax coloring</dfn> for you.)  So how do we let
+      the computer know we want to stay in the string?  We have
+      to <dfn>escape</dfn> the apostophe, like this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">You\'re swell!</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+You're swell!
+</pre>
+        <p>
+                The backslash is the escape character.  In other words, if you have
+      a backslash and another character, they are sometimes translated
+      into a new character.  The only things the backslash escapes,
+      though, are the apostrophe and the backslash itself.  (If you
+      think about it, escape characters must always escape themselves.)
+      A few examples are in order here, I think:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">You\'re swell!</span>'
+puts '<span class="L2Pstring">backslash at the end of a string:  \\</span>'
+puts '<span class="L2Pstring">up\\down</span>'
+puts '<span class="L2Pstring">up\down</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+You're swell!
+backslash at the end of a string:  \
+up\down
+up\down
+</pre>
+        <p>
+                Since the backslash does <em>not</em> escape a <span class="L2Pcode">'<span class="L2Pstring">d</span>'</span>,
+      but <em>does</em> escape itself, those last two strings are
+      identical.  They don't look the same in the code, but in your
+      computer they really are the same.
+
+        </p>
+
+        <p>
+                If you have any other questions, just
+      <a href="/LearnToProgram/?Chapter=03">keep reading</a>!  I couldn't
+      answer every question on <em>this</em> page, after all.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p style="padding-bottom: 20px;">
+          &copy; 2003-2009 Chris Pine
+        </p>
+
+      </div>

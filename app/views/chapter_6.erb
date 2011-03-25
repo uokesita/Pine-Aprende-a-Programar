@@ -1,0 +1,566 @@
+      <div id="contentPane">
+
+        <h1>
+          6.&nbsp;&nbsp;Flow Control
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                Ahhhh, flow control.  This is where it all comes together.  Even though
+      this chapter is shorter and easier than the <a href="/LearnToProgram/?Chapter=05">methods</a>
+      chapter, it will open up a whole world of programming possibilities.
+      After this chapter, we'll be able to write truly interactive
+      programs; in the past we have made programs which <em>say</em> different
+      things depending on your keyboard input, but after this chapter
+      they will actually <em>do</em> different things, too.  But
+      before we can do that, we need to be
+      able to compare the objects in our programs.  We need...
+
+        </p>
+
+        <h2>
+          Comparison Methods
+        </h2>
+        <p>
+                Let's rush through this part so we can get to the next
+      section, <strong>Branching</strong>, where all the cool
+      stuff happens.  So, to see if one object is greater than
+      or less than another, we use the methods <span class="L2Pcode">&gt;</span>
+      and <span class="L2Pcode">&lt;</span>, like this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">1</span> &gt; <span class="L2Pnumber">2</span>
+
+puts <span class="L2Pnumber">1</span> &lt; <span class="L2Pnumber">2</span></pre>
+        <pre class="L2PoutputBlock">
+false
+true
+</pre>
+        <p>
+                No problem.  Likewise, we can find out if an object is
+      greater-than-or-equal-to another (or less-than-or-equal-to)
+      with the methods <span class="L2Pcode">&gt;=</span> and <span class="L2Pcode">&lt;=</span>
+
+        </p>
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">5</span> &gt;= <span class="L2Pnumber">5</span>
+puts <span class="L2Pnumber">5</span> &lt;= <span class="L2Pnumber">4</span></pre>
+        <pre class="L2PoutputBlock">
+
+true
+false
+</pre>
+        <p>
+                And finally, we can see if two objects are equal or not
+      using <span class="L2Pcode">==</span> (which means "are these equal?")
+      and <span class="L2Pcode">!=</span> (which means "are these different?").
+      It's important not to confuse <span class="L2Pcode">=</span> with <span class="L2Pcode">==</span>.
+      <span class="L2Pcode">=</span> is for telling a variable to point at an object
+      (assignment), and <span class="L2Pcode">==</span> is for asking the question:  "Are
+      these two objects equal?"
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts <span class="L2Pnumber">1</span> == <span class="L2Pnumber">1</span>
+puts <span class="L2Pnumber">2</span> != <span class="L2Pnumber">1</span></pre>
+        <pre class="L2PoutputBlock">
+true
+true
+</pre>
+
+        <p>
+                Of course, we can compare strings, too.  When strings
+      get compared, they compare their <dfn>lexicographical ordering</dfn>,
+      which basically means their dictionary ordering.  <span class="L2Pcode">cat</span>
+      comes before <span class="L2Pcode">dog</span> in the dictionary, so:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">cat</span>' &lt; '<span class="L2Pstring">dog</span>'</pre>
+
+        <pre class="L2PoutputBlock">
+true
+</pre>
+        <p>
+                There's a catch, though:  the way computers usually do things,
+      they order capital letters as coming before lowercase letters.
+      (That's how they store the letters in fonts, for example:
+      all the capital letters first, then the lowercase ones.)
+      This means that it will think <span class="L2Pcode">'<span class="L2Pstring">Zoo</span>'</span> comes before <span class="L2Pcode">'<span class="L2Pstring">ant</span>'</span>, so if you
+      want to figure out which word would come first in a real dictionary,
+      make sure to use <span class="L2Pcode">downcase</span> (or <span class="L2Pcode">upcase</span> or
+      <span class="L2Pcode">capitalize</span>) on both words before you try to compare them.
+
+        </p>
+
+        <p>
+                One last note before <strong>Branching</strong>:  The comparison
+      methods aren't giving us the strings <span class="L2Pcode">'<span class="L2Pstring">true</span>'</span> and
+      <span class="L2Pcode">'<span class="L2Pstring">false</span>'</span>; they are giving us the special objects <span class="L2Pcode"><span class="L2Pkeyword">true</span></span> and
+      <span class="L2Pcode"><span class="L2Pkeyword">false</span></span>.  (Of course, <span class="L2Pcode"><span class="L2Pkeyword">true</span>.to_s</span> gives us
+      <span class="L2Pcode">'<span class="L2Pstring">true</span>'</span>, which is why <span class="L2Pcode">puts</span> printed <span class="L2Pcode">'<span class="L2Pstring">true</span>'</span>.)
+      <span class="L2Pcode"><span class="L2Pkeyword">true</span></span> and <span class="L2Pcode"><span class="L2Pkeyword">false</span></span> are used all the time in...
+
+        </p>
+
+        <h2>
+          Branching
+        </h2>
+        <p>
+                Branching is a simple concept, but powerful.  In fact, it's so simple
+      that I bet I don't even have to explain it at all; I'll just show you:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, what\'s your name?</span>'
+name = gets.chomp
+puts '<span class="L2Pstring">Hello, </span>' + name + '<span class="L2Pstring">.</span>'
+
+<span class="L2Pkeyword">if</span> name == '<span class="L2Pstring">Chris</span>'
+  puts '<span class="L2Pstring">What a lovely name!</span>'
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+Hello, what's your name?
+<span class="L2Pinput">Chris</span>
+Hello, Chris.
+What a lovely name!
+</pre>
+        <p>But if we put in a different name...</p>
+
+        <pre class="L2PoutputBlock">
+Hello, what's your name?
+<span class="L2Pinput">Chewbacca</span>
+Hello, Chewbacca.
+</pre>
+        <p>
+                And that is branching.  If what comes after the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> is
+      <span class="L2Pcode"><span class="L2Pkeyword">true</span></span>, we run the code between the
+      <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> and the <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>.  If what comes after the
+      <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> is <span class="L2Pcode"><span class="L2Pkeyword">false</span></span>, we don't.  Plain and simple.
+
+        </p>
+
+        <p>
+                I indented the code between the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> and the <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>
+      just because I think it's easier to keep track of the
+      branching that way.  Almost all
+      programmers do this, regardless of what language they are
+      programming in.  It may not seem much help in this simple
+      example, but when things get more complex, it makes a big
+      difference.
+
+        </p>
+        <p>
+                Often, we would like a program to do one thing if an expression
+      is <span class="L2Pcode"><span class="L2Pkeyword">true</span></span>, and another if it is <span class="L2Pcode"><span class="L2Pkeyword">false</span></span>.  That's
+      what <span class="L2Pcode"><span class="L2Pkeyword">else</span></span> is for:
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">I am a fortune-teller.  Tell me your name:</span>'
+name = gets.chomp
+<span class="L2Pkeyword">if</span> name == '<span class="L2Pstring">Chris</span>'
+  puts '<span class="L2Pstring">I see great things in your future.</span>'
+<span class="L2Pkeyword">else</span>
+  puts '<span class="L2Pstring">Your future is... Oh my!  Look at the time!</span>'
+  puts '<span class="L2Pstring">I really have to go, sorry!</span>'
+
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+I am a fortune-teller.  Tell me your name:
+<span class="L2Pinput">Chris</span>
+I see great things in your future.
+</pre>
+        <p>Now let's try a different name...</p>
+        <pre class="L2PoutputBlock">
+I am a fortune-teller.  Tell me your name:
+<span class="L2Pinput">Ringo</span>
+
+Your future is... Oh my!  Look at the time!
+I really have to go, sorry!
+</pre>
+        <p>
+                Branching is kind of like coming to a fork in the code:  Do
+      we take the path for people whose <span class="L2Pcode">name&nbsp;==&nbsp;'<span class="L2Pstring">Chris</span>'</span>,
+      or <span class="L2Pcode"><span class="L2Pkeyword">else</span></span> do we take the other path?
+
+        </p>
+        <p>
+
+                And just like the branches of a tree, you can have branches
+      which themselves have branches:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, and welcome to 7th grade English.</span>'
+puts '<span class="L2Pstring">My name is Mrs. Gabbard.  And your name is...?</span>'
+name = gets.chomp
+
+<span class="L2Pkeyword">if</span> name == name.capitalize
+  puts '<span class="L2Pstring">Please take a seat, </span>' + name + '<span class="L2Pstring">.</span>'
+<span class="L2Pkeyword">else</span>
+
+  puts name + '<span class="L2Pstring">?  You mean </span>' + name.capitalize + '<span class="L2Pstring">, right?</span>'
+  puts '<span class="L2Pstring">Don\'t you even know how to spell your name??</span>'
+  reply = gets.chomp
+  
+  <span class="L2Pkeyword">if</span> reply.downcase == '<span class="L2Pstring">yes</span>'
+    puts '<span class="L2Pstring">Hmmph!  Well, sit down!</span>'
+  <span class="L2Pkeyword">else</span>
+
+    puts '<span class="L2Pstring">GET OUT!!</span>'
+  <span class="L2Pkeyword">end</span>
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+Hello, and welcome to 7th grade English.
+My name is Mrs. Gabbard.  And your name is...?
+<span class="L2Pinput">chris</span>
+chris?  You mean Chris, right?
+Don't you even know how to spell your name??
+<span class="L2Pinput">yes</span>
+Hmmph!  Well, sit down!
+
+</pre>
+        <p>Fine, I'll capitalize it...</p>
+        <pre class="L2PoutputBlock">
+Hello, and welcome to 7th grade English.
+My name is Mrs. Gabbard.  And your name is...?
+<span class="L2Pinput">Chris</span>
+Please take a seat, Chris.
+</pre>
+        <p>
+                Sometimes it might get confusing trying to figure out
+      where all of the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span>s, <span class="L2Pcode"><span class="L2Pkeyword">else</span></span>s, and
+      <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>s go.  What I do is write the <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>
+
+      <em>at the same time</em> I write the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span>.  So
+      as I was writing the above program, this is how it looked
+      first:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, and welcome to 7th grade English.</span>'
+puts '<span class="L2Pstring">My name is Mrs. Gabbard.  And your name is...?</span>'
+name = gets.chomp
+
+<span class="L2Pkeyword">if</span> name == name.capitalize
+<span class="L2Pkeyword">else</span>
+
+<span class="L2Pkeyword">end</span></pre>
+        <p>
+                Then I filled it in with <dfn>comments</dfn>, stuff
+      in the code the computer will ignore:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, and welcome to 7th grade English.</span>'
+puts '<span class="L2Pstring">My name is Mrs. Gabbard.  And your name is...?</span>'
+name = gets.chomp
+
+<span class="L2Pkeyword">if</span> name == name.capitalize
+  <span class="L2Pcomment">#  She's civil.</span>
+
+<span class="L2Pkeyword">else</span>
+  <span class="L2Pcomment">#  She gets mad.</span>
+<span class="L2Pkeyword">end</span></pre>
+        <p>
+                Anything after a <span class="L2Pcode"><span class="L2Pcomment">#</span></span> is
+      considered a comment (unless, of course, you
+      are in a string).  After that, I replaced the comments
+      with working code.  Some people like to leave the comments
+      in; personally, I think well-written code usually speaks
+      for itself.  I used to use more comments, but the more
+      "fluent" in Ruby I become, the less I use them.  I actually
+      find them distracting much of the time.  It's a personal
+      choice; you'll find your own (usually evolving) style.
+      So my next step looked like this:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, and welcome to 7th grade English.</span>'
+puts '<span class="L2Pstring">My name is Mrs. Gabbard.  And your name is...?</span>'
+name = gets.chomp
+
+
+<span class="L2Pkeyword">if</span> name == name.capitalize
+  puts '<span class="L2Pstring">Please take a seat, </span>' + name + '<span class="L2Pstring">.</span>'
+<span class="L2Pkeyword">else</span>
+  puts name + '<span class="L2Pstring">?  You mean </span>' + name.capitalize + '<span class="L2Pstring">, right?</span>'
+  puts '<span class="L2Pstring">Don\'t you even know how to spell your name??</span>'
+  reply = gets.chomp
+  
+  <span class="L2Pkeyword">if</span> reply.downcase == '<span class="L2Pstring">yes</span>'
+  <span class="L2Pkeyword">else</span>
+
+  <span class="L2Pkeyword">end</span>
+<span class="L2Pkeyword">end</span></pre>
+        <p>
+                Again, I wrote down the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span>, <span class="L2Pcode"><span class="L2Pkeyword">else</span></span>, and
+      <span class="L2Pcode"><span class="L2Pkeyword">end</span></span> all at the same time.  It really helps me keep
+      track of "where I am" in the code.  It also makes the job
+      seem easier because I can focus on one small part, like
+      filling in the code between the <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> and the
+      <span class="L2Pcode"><span class="L2Pkeyword">else</span></span>.  The other benefit of doing it this way
+      is that the computer can understand the program at any
+      stage.  Every one of the unfinished versions of the
+      program I showed you would run.  They weren't finished,
+      but they were working programs.  That way I could test it
+      as I wrote it, which helped to see how it was coming along
+      and where it still needed work.  When it passed all
+      of the tests, that's how I knew I was done!
+
+        </p>
+
+        <p>
+                These tips will help you write programs with branching,
+      but they also help with the other main type of flow control:
+
+        </p>
+        <h2>
+          Looping
+        </h2>
+        <p>
+                Often, you'll want your computer to do the same thing over and
+      over again&mdash;after all, that's what computers are supposed to
+      be so good at.
+
+        </p>
+        <p>
+
+                When you tell your computer to keep repeating something,
+      you also need to tell it when to stop.  Computers never get bored,
+      so if you don't tell it to stop, it won't.  We make sure this
+      doesn't happen by telling the computer to repeat certain parts
+      of a program <span class="L2Pcode"><span class="L2Pkeyword">while</span></span> a certain condition is true.  This
+      works very similarly to how <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> works:
+
+        </p>
+        <pre class="L2PcodeBlock">command = '<span class="L2Pstring"></span>'
+
+<span class="L2Pkeyword">while</span> command != '<span class="L2Pstring">bye</span>'
+  puts command
+  command = gets.chomp
+
+<span class="L2Pkeyword">end</span>
+
+puts '<span class="L2Pstring">Come again soon!</span>'</pre>
+        <pre class="L2PoutputBlock">
+
+<span class="L2Pinput">Hello?</span>
+Hello?
+<span class="L2Pinput">Hi!</span>
+Hi!
+<span class="L2Pinput">Very nice to meet you.</span>
+
+Very nice to meet you.
+<span class="L2Pinput">Oh... how sweet!</span>
+Oh... how sweet!
+<span class="L2Pinput">bye</span>
+Come again soon!
+</pre>
+        <p>
+                And that's a loop.  (You may have noticed the blank line at the
+      beginning of the output; it's from the first <span class="L2Pcode">puts</span>, before
+      the first <span class="L2Pcode">gets</span>.  How would you change the program to get
+      rid of this first line.  Test it!  Did it work <em>exactly</em>
+
+      like the program above, other than that first blank line?)
+
+        </p>
+        <p>
+                Loops allow you to do all kinds of interesting things, as I'm sure
+      you can imagine.  However, they can also cause problems if you
+      make a mistake.  What if your computer gets trapped in an infinite
+      loop?  If you think this may have happened, just hold down the
+      <kbd>Ctrl</kbd> key and press <kbd>C</kbd>.
+
+        </p>
+        <p>
+                Before we start playing around with loops, though,
+      let's learn a few things to make our job easier.
+
+        </p>
+
+        <h2>
+          A Little Bit of Logic
+        </h2>
+        <p>
+                Let's take a look at our first branching program again.  What if
+      my wife came home, saw the program, tried it out, and it didn't
+      tell her what a lovely name <em>she</em> had?  I wouldn't want to
+      hurt her feelings (or sleep on the couch), so let's rewrite it:
+
+        </p>
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, what\'s your name?</span>'
+name = gets.chomp
+puts '<span class="L2Pstring">Hello, </span>' + name + '<span class="L2Pstring">.</span>'
+
+<span class="L2Pkeyword">if</span> name == '<span class="L2Pstring">Chris</span>'
+  puts '<span class="L2Pstring">What a lovely name!</span>'
+<span class="L2Pkeyword">else</span>
+  <span class="L2Pkeyword">if</span> name == '<span class="L2Pstring">Katy</span>'
+    puts '<span class="L2Pstring">What a lovely name!</span>'
+  <span class="L2Pkeyword">end</span>
+
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+Hello, what's your name?
+<span class="L2Pinput">Katy</span>
+Hello, Katy.
+What a lovely name!
+</pre>
+        <p>
+                Well, it works... but it isn't a very pretty program.  Why not?
+      Well, the best
+      rule I ever learned in programming was the <dfn>DRY</dfn> rule:
+      <dfn>Don't Repeat Yourself</dfn>.  I could probably write a small
+      book just on why that is such a good rule.  In our case, we
+      repeated the line <span class="L2Pcode">puts&nbsp;'<span class="L2Pstring">What&nbsp;a&nbsp;lovely&nbsp;name!</span>'</span>.  Why is
+      this such a big deal?  Well, what if I made a spelling mistake
+      when I rewrote it?  What if I wanted to change it from
+      <span class="L2Pcode">'<span class="L2Pstring">lovely</span>'</span> to <span class="L2Pcode">'<span class="L2Pstring">beautiful</span>'</span> on both lines?
+      I'm lazy, remember?  Basically, if
+      I want the program to do the same thing when it gets
+      <span class="L2Pcode">'<span class="L2Pstring">Chris</span>'</span> or <span class="L2Pcode">'<span class="L2Pstring">Katy</span>'</span>, then it should really
+      <em>do the same thing</em>:
+
+        </p>
+
+        <pre class="L2PcodeBlock">puts '<span class="L2Pstring">Hello, what\'s your name?</span>'
+name = gets.chomp
+puts '<span class="L2Pstring">Hello, </span>' + name + '<span class="L2Pstring">.</span>'
+<span class="L2Pkeyword">if</span> (name == '<span class="L2Pstring">Chris</span>' <span class="L2Pkeyword">or</span> name == '<span class="L2Pstring">Katy</span>')
+  puts '<span class="L2Pstring">What a lovely name!</span>'
+
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+Hello, what's your name?
+<span class="L2Pinput">Katy</span>
+Hello, Katy.
+What a lovely name!
+</pre>
+        <p>
+                Much better.  In order to make it work, I used <span class="L2Pcode"><span class="L2Pkeyword">or</span></span>.
+      The other <em>logical operators</em> are <span class="L2Pcode"><span class="L2Pkeyword">and</span></span> and 
+      <span class="L2Pcode"><span class="L2Pkeyword">not</span></span>.  It is always a good idea to use parentheses
+      when working with these.  Let's see how they work:
+
+        </p>
+
+        <pre class="L2PcodeBlock">iAmChris  = <span class="L2Pkeyword">true</span>
+iAmPurple = <span class="L2Pkeyword">false</span>
+iLikeFood = <span class="L2Pkeyword">true</span>
+iEatRocks = <span class="L2Pkeyword">false</span>
+
+puts (iAmChris  <span class="L2Pkeyword">and</span> iLikeFood)
+puts (iLikeFood <span class="L2Pkeyword">and</span> iEatRocks)
+puts (iAmPurple <span class="L2Pkeyword">and</span> iLikeFood)
+puts (iAmPurple <span class="L2Pkeyword">and</span> iEatRocks)
+puts
+puts (iAmChris  <span class="L2Pkeyword">or</span> iLikeFood)
+puts (iLikeFood <span class="L2Pkeyword">or</span> iEatRocks)
+puts (iAmPurple <span class="L2Pkeyword">or</span> iLikeFood)
+puts (iAmPurple <span class="L2Pkeyword">or</span> iEatRocks)
+puts
+puts (<span class="L2Pkeyword">not</span> iAmPurple)
+puts (<span class="L2Pkeyword">not</span> iAmChris )</pre>
+
+        <pre class="L2PoutputBlock">
+true
+false
+false
+false
+
+true
+true
+true
+false
+
+true
+false
+</pre>
+        <p>
+                The only one of these which might trick you is
+      <span class="L2Pcode"><span class="L2Pkeyword">or</span></span>.  In English, we often use "or" to mean
+      "one or the other, but not both."  For example, your
+      mom might say, "For dessert, you can have pie or cake."
+      She did <em>not</em> mean you could have them both!
+      A computer, on the other hand, uses <span class="L2Pcode"><span class="L2Pkeyword">or</span></span> to mean "one or the other,
+      or both."  (Another way of saying it is, "at least one of
+      these is true.")  This is why computers are more fun than
+      moms.
+
+        </p>
+
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+                &bull; <em>"99 bottles of beer on the wall..."</em>  Write a program
+      which prints out the lyrics to that beloved classic, that
+      field-trip favorite: "99 Bottles of Beer on the Wall."
+
+        </p>
+        <p>
+                &bull; Write a Deaf Grandma program.  Whatever you say
+      to grandma (whatever you type in), she should respond with
+      <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">HUH?!&nbsp;&nbsp;SPEAK&nbsp;UP,&nbsp;SONNY!</span>, unless you shout it (type in
+      all capitals).  If you shout, she can hear you (or at least
+      she thinks so) and yells back, <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">NO,&nbsp;NOT&nbsp;SINCE&nbsp;1938!</span>  To
+      make your program <em>really</em> believable, have grandma
+      shout a different year each time; maybe any year at random
+      between 1930 and 1950.  (This part is optional, and would be
+      much easier if you read the section on Ruby's random number
+      generator at the end of the <a href="/LearnToProgram/?Chapter=05">methods</a>
+
+      chapter.)  You can't stop talking to grandma
+      until you shout <span class="L2Pinput">BYE</span>.<br />
+      <em><strong>Hint:</strong>  Don't forget about
+      </em><span class="L2Pcode">chomp</span><em>!  </em><span class="L2Pcode">'<span class="L2Pstring">BYE</span>'</span><em>with an
+      Enter is not the same as </em><span class="L2Pcode">'<span class="L2Pstring">BYE</span>'</span><em> without
+      one!</em><br />
+
+      <em><strong>Hint 2:</strong>  Try to think about what parts
+      of your program should happen over and over again.  All
+      of those should be in your </em><span class="L2Pcode"><span class="L2Pkeyword">while</span></span><em> loop.</em>
+
+        </p>
+        <p>
+                &bull; Extend your Deaf Grandma program:  What if grandma
+      doesn't want you to leave?  When you shout <span class="L2Pinput">BYE</span>, she
+      could pretend not to hear you.  Change your previous
+      program so that you have to shout <span class="L2Pinput">BYE</span> three times
+      <em>in a row</em>.  Make sure to test your program:
+      if you shout <span class="L2Pinput">BYE</span> three times, but not in a row, you
+      should still be talking to grandma.
+
+        </p>
+
+        <p>
+                &bull; Leap Years.  Write a program which will ask for
+      a starting year and an ending year, and then <span class="L2Pcode">puts</span>
+      all of the leap years between them (and including them,
+      if they are also leap years).  Leap years are years divisible
+      by four (like 1984 and 2004).  However, years divisible
+      by 100 are <em>not</em> leap years (such as 1800 and
+      1900) <strong><em>unless</em></strong> they are divisible
+      by 400 (like 1600 and 2000, which were in fact leap years).
+      <em>(Yes, it's all pretty
+      confusing, but not as confusing has having July in the
+      middle of the winter, which is what would eventually
+      happen.)</em>
+
+        </p>
+        <p>
+                When you finish those, take a break!  You've learned a lot
+      already.  Congratulations!  Are you surprised at the number
+      of things you can tell a computer to do?  A few more chapters
+      and you'll be able to program just about anything.  Seriously!
+      Just look at all the things you can do now that you couldn't
+      do without looping and branching.
+
+        </p>
+        <p>
+                Now let's learn about a new kind of
+      object, one which keeps track of lists of other objects:
+      <a href="/LearnToProgram/?Chapter=07">arrays</a>.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+
+        <p style="padding-bottom: 20px;">
+          &copy; 2003-2009 Chris Pine
+        </p>
+      </div>

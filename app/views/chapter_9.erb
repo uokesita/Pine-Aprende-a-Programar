@@ -1,0 +1,741 @@
+      <div id="contentPane">
+
+        <h1>
+          9.&nbsp;&nbsp;Classes
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                So far we've seen several different kinds, or
+      <dfn>classes</dfn>, of objects:
+      strings, integers, floats, arrays, and a few special objects
+      (<span class="L2Pcode"><span class="L2Pkeyword">true</span></span>, <span class="L2Pcode"><span class="L2Pkeyword">false</span></span>, and <span class="L2Pcode"><span class="L2Pkeyword">nil</span></span>) which
+      we'll talk about later.
+      In Ruby, these classes are always capitalized:  <span class="L2Pcode">String</span>,
+      <span class="L2Pcode">Integer</span>, <span class="L2Pcode">Float</span>, <span class="L2Pcode">Array</span>... etc.
+      In general, if we want to create a new object of a
+      certain class, we use <span class="L2Pcode">new</span>:
+
+        </p>
+
+        <pre class="L2PcodeBlock">a = Array.new  + [<span class="L2Pnumber">12345</span>]  <span class="L2Pcomment">#  Array  addition.</span>
+b = String.new + '<span class="L2Pstring">hello</span>'  <span class="L2Pcomment">#  String addition.</span>
+c = Time.new
+
+puts '<span class="L2Pstring">a = </span>'+a.to_s
+puts '<span class="L2Pstring">b = </span>'+b.to_s
+puts '<span class="L2Pstring">c = </span>'+c.to_s</pre>
+
+        <pre class="L2PoutputBlock">
+a = 12345
+b = hello
+c = Tue Apr 14 16:29:20 GMT 2009
+</pre>
+        <p>
+                Because we can create arrays and strings using
+      <span class="L2Pcode">[...]</span> and <span class="L2Pcode">'<span class="L2Pstring">...</span>'</span> respectively, we rarely create
+      them using <span class="L2Pcode">new</span>.  (Though it's not really obvious
+      from the above example, <span class="L2Pcode">String.new</span> creates
+      an empty string, and <span class="L2Pcode">Array.new</span> creates an empty
+      array.)  Also, numbers are special exceptions:  you can't
+      create an integer with <span class="L2Pcode">Integer.new</span>.  You just have
+      to write the integer.
+
+        </p>
+
+        <h2>
+          The <span class="L2Pcode">Time</span> Class
+        </h2>
+        <p>
+                So what's the story with this <span class="L2Pcode">Time</span> class?
+      <span class="L2Pcode">Time</span> objects represent moments in time.  You can
+      add (or subtract) numbers to (or from) times to get new times:
+      adding <span class="L2Pcode"><span class="L2Pnumber">1.5</span></span> to a time makes a new time one-and-a-half
+      seconds later:
+
+        </p>
+
+        <pre class="L2PcodeBlock">time  = Time.new   <span class="L2Pcomment">#  The moment I generated this web page.</span>
+time2 = time + <span class="L2Pnumber">60</span>  <span class="L2Pcomment">#  One minute later.</span>
+
+puts time
+puts time2</pre>
+        <pre class="L2PoutputBlock">
+Tue Apr 14 16:29:20 GMT 2009
+Tue Apr 14 16:30:20 GMT 2009
+</pre>
+        <p>
+
+                You can also make a time for a specific moment using
+      <span class="L2Pcode">Time.mktime</span>:
+
+        </p>
+        <pre class="L2PcodeBlock">puts Time.mktime(<span class="L2Pnumber">2000</span>, <span class="L2Pnumber">1</span>, <span class="L2Pnumber">1</span>)          <span class="L2Pcomment">#  Y2K.</span>
+puts Time.mktime(<span class="L2Pnumber">1976</span>, <span class="L2Pnumber">8</span>, <span class="L2Pnumber">3</span>, <span class="L2Pnumber">10</span>, <span class="L2Pnumber">11</span>)  <span class="L2Pcomment">#  When I was born.</span></pre>
+
+        <pre class="L2PoutputBlock">
+Sat Jan 01 00:00:00 GMT 2000
+Tue Aug 03 10:11:00 GMT 1976
+</pre>
+        <p>
+                Notice:  that's when I was born in Pacific Daylight Savings
+      Time (PDT).  When Y2K struck, though, it was Pacific
+      Standard Time (PST), at least to us West Coasters.  The
+      parentheses are to group the parameters to <span class="L2Pcode">mktime</span>
+      together.  The more parameters you add, the more accurate your
+      time becomes.
+
+        </p>
+        <p>
+                You can compare times using the comparison methods
+      (an earlier time is <em>less than</em> a later time),
+      and if you subtract one time from another, you'll get the
+      number of seconds between them.  Play around with it!
+
+        </p>
+
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+                &bull; One billion seconds...  Find out the exact second you
+      were born (if you can).  Figure out when you will turn (or
+      perhaps when you did turn?) one billion seconds old.  Then
+      go mark your calendar.
+
+        </p>
+        <p>
+                &bull; Happy Birthday!  Ask what year a person was born in,
+      then the month, then the day.  Figure out how old they are
+      and give them a big <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">SPANK!</span> for each birthday
+      they have had.
+
+        </p>
+
+        <h2>
+          The <span class="L2Pcode">Hash</span> Class
+        </h2>
+        <p>
+                Another useful class is the <span class="L2Pcode">Hash</span> class.  Hashes
+      are a lot like arrays:  they have a bunch of slots which
+      can point to various objects.  However, in an array, the
+      slots are lined up in a row, and each one is numbered
+      (starting from zero).  In a hash, the slots aren't in
+      a row (they are just sort of jumbled together), and you
+      can use <em>any</em> object to refer to a slot, not just
+      a number.  It's good to use hashes when you have a bunch
+      of things you want to keep track of, but they don't really
+      fit into an ordered list.  For example, the colors I use for different
+      parts of the code which created this tutorial:
+
+        </p>
+
+        <pre class="L2PcodeBlock">colorArray = []  <span class="L2Pcomment">#  same as Array.new</span>
+colorHash  = {}  <span class="L2Pcomment">#  same as Hash.new</span>
+
+colorArray[<span class="L2Pnumber">0</span>]         = '<span class="L2Pstring">red</span>'
+colorArray[<span class="L2Pnumber">1</span>]         = '<span class="L2Pstring">green</span>'
+colorArray[<span class="L2Pnumber">2</span>]         = '<span class="L2Pstring">blue</span>'
+colorHash['<span class="L2Pstring">strings</span>']  = '<span class="L2Pstring">red</span>'
+colorHash['<span class="L2Pstring">numbers</span>']  = '<span class="L2Pstring">green</span>'
+colorHash['<span class="L2Pstring">keywords</span>'] = '<span class="L2Pstring">blue</span>'
+
+colorArray.each <span class="L2Pkeyword">do</span> |color|
+  puts color
+
+<span class="L2Pkeyword">end</span>
+colorHash.each <span class="L2Pkeyword">do</span> |codeType, color|
+  puts codeType + '<span class="L2Pstring">:  </span>' + color
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+red
+green
+blue
+strings:  red
+keywords:  blue
+numbers:  green
+</pre>
+        <p>
+                If I use an array, I have to remember that slot <span class="L2Pcode"><span class="L2Pnumber">0</span></span> is for
+      strings, slot <span class="L2Pcode"><span class="L2Pnumber">1</span></span> is for numbers, etc.  But if I use a hash, it's
+      easy!  Slot <span class="L2Pcode">'<span class="L2Pstring">strings</span>'</span> holds the color of the strings, of course.
+      Nothing to remember.  You might have noticed that when we used
+      <span class="L2Pcode">each</span>, the objects in the hash didn't come out in the same
+      order we put them in.  Arrays
+      are for keeping things in order, not hashes.
+
+        </p>
+
+        <p>
+                Though people usually use strings to name the slots in a hash, you
+      could use any kind of object, even arrays and other hashes (though I can't
+      think of why you would want to do this...):
+
+        </p>
+        <pre class="L2PcodeBlock">weirdHash = Hash.new
+
+weirdHash[<span class="L2Pnumber">12</span>] = '<span class="L2Pstring">monkeys</span>'
+weirdHash[[]] = '<span class="L2Pstring">emptiness</span>'
+weirdHash[Time.new] = '<span class="L2Pstring">no time like the present</span>'</pre>
+        <p>
+
+                Hashes and arrays are good for different things; it's up
+      to you to decide which one is best for a particular problem.
+
+        </p>
+        <h2>
+          Extending Classes
+        </h2>
+        <p>
+                At the end of the last chapter, you wrote a method to give
+      the English phrase for a given integer.  It wasn't an integer
+      method, though; it was just a generic "program" method.  Wouldn't
+      it be nice if you could write something like <span class="L2Pcode"><span class="L2Pnumber">22</span>.to_eng</span>
+      instead of <span class="L2Pcode">englishNumber&nbsp;<span class="L2Pnumber">22</span></span>?  Here's how you would do
+      that:
+
+        </p>
+
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Integer</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">to_eng</span>
+    <span class="L2Pkeyword">if</span> <span class="L2Pkeyword">self</span> == <span class="L2Pnumber">5</span>
+
+      english = '<span class="L2Pstring">five</span>'
+    <span class="L2Pkeyword">else</span>
+      english = '<span class="L2Pstring">fifty-eight</span>'
+    <span class="L2Pkeyword">end</span>
+    
+    english
+  <span class="L2Pkeyword">end</span>
+
+<span class="L2Pkeyword">end</span>
+
+<span class="L2Pcomment">#  I'd better test on a couple of numbers...</span>
+puts <span class="L2Pnumber">5</span>.to_eng
+puts <span class="L2Pnumber">58</span>.to_eng</pre>
+        <pre class="L2PoutputBlock">
+five
+fifty-eight
+</pre>
+        <p>
+
+                Well, I tested it; it seems to work.  ;)
+
+        </p>
+        <p>
+                So we defined an integer method by jumping into the
+      <span class="L2Pcode">Integer</span> class, defining the method there,
+      and jumping back out.  Now all integers have this
+      (somewhat incomplete) method.  In fact, if you didn't
+      like the way a built-in method like
+      <span class="L2Pcode">to_s</span> worked, you could just
+      redefine it in much the same way... but I don't recommend
+      it!  It's best to leave the old methods alone and to
+      make new ones when you want to do something new.
+
+        </p>
+        <p>
+                So... confused yet?  Let me go over that last program
+      some more.  So far, whenever we executed any code or
+      defined any methods, we did it in the default
+      "program" object.  In our last program, we left that
+      object for the first time and went into the class
+      <span class="L2Pcode">Integer</span>.  We defined a method there (which
+      makes it an integer method) and all integers can
+      use it.  Inside that method we use <span class="L2Pcode"><span class="L2Pkeyword">self</span></span>
+
+      to refer to the object (the integer) using the method.
+
+        </p>
+        <h2>
+          Creating Classes
+        </h2>
+        <p>
+                We've seen a number of different classes of objects.
+      However, it's easy to come up with kinds of objects
+      that Ruby doesn't have.  Luckily, creating a new
+      class is as easy as extending an old one.  Let's say
+      we wanted to make some dice in Ruby.  Here's how we
+      could make the Die class:
+
+        </p>
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Die</span>
+
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">roll</span>
+    <span class="L2Pnumber">1</span> + rand(<span class="L2Pnumber">6</span>)
+  <span class="L2Pkeyword">end</span>
+  
+<span class="L2Pkeyword">end</span>
+
+<span class="L2Pcomment">#  Let's make a couple of dice...</span>
+dice = [Die.new, Die.new]
+
+<span class="L2Pcomment">#  ...and roll them.</span>
+dice.each <span class="L2Pkeyword">do</span> |die|
+  puts die.roll
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+3
+4
+</pre>
+        <p>
+
+                (If you skipped the section on random numbers,
+      <span class="L2Pcode">rand(<span class="L2Pnumber">6</span>)</span> just gives a random number between
+      <span class="L2Pcode"><span class="L2Pnumber">0</span></span> and <span class="L2Pcode"><span class="L2Pnumber">5</span></span>.)
+
+        </p>
+        <p>
+                And that's it!  Objects of our very own.
+
+        </p>
+
+        <p>
+                We can define
+      all sorts of methods for our objects... but there's
+      something missing.  Working with these objects feels
+      a lot like programming before we learned about
+      variables.  Look at our dice, for example.  We can
+      roll them, and each time we do they give us a different
+      number.  But if we wanted to hang on to that number, we
+      would have to create a variable to point to the number.
+      It seems like any decent die should be able to <em>have</em>
+      a number, and that rolling the die should change the number.
+      If we keep track of the die, we shouldn't also have to keep track
+      of the number it is showing.
+
+        </p>
+        <p>
+                However, if we try to store the number we rolled in a (local)
+      variable in <span class="L2Pcode">roll</span>, it will be gone as soon as
+      <span class="L2Pcode">roll</span> is finished.  We need to store the number in
+      a different kind of variable:
+
+        </p>
+
+        <h2>
+          Instance Variables
+        </h2>
+        <p>
+                Normally when we want to talk about a string, we will just
+      call it a <dfn>string</dfn>.  However, we could also call
+      it a <dfn>string object</dfn>.  Sometimes programmers might
+      call it <dfn>an instance of the class <span class="L2Pcode">String</span></dfn>, but this
+      is just a fancy (and rather long-winded) way of saying
+      <dfn>string</dfn>.  An <dfn>instance</dfn> of a class is just an
+      object of that class.
+
+        </p>
+
+        <p>
+                So instance variables are just an object's variables.  A
+      method's local variables last until the method is finished.
+      An object's instance variables, on the other hand, will
+      last as long as the object does.  To tell instance variables
+      from local variables, they have <span class="L2Pcode">@</span> in front of
+      their names:
+
+        </p>
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Die</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">roll</span>
+
+    @numberShowing = <span class="L2Pnumber">1</span> + rand(<span class="L2Pnumber">6</span>)
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">showing</span>
+    @numberShowing
+  <span class="L2Pkeyword">end</span>
+
+  
+<span class="L2Pkeyword">end</span>
+
+die = Die.new
+die.roll
+puts die.showing
+puts die.showing
+die.roll
+puts die.showing
+puts die.showing</pre>
+        <pre class="L2PoutputBlock">
+1
+1
+5
+5
+</pre>
+        <p>
+                Very nice!  So <span class="L2Pcode">roll</span> rolls the die and
+      <span class="L2Pcode">showing</span> tells us which number is showing.
+      However, what if we try to look at what's showing before
+      we've rolled the die (before we've set <span class="L2Pcode">@numberShowing</span>)?
+
+        </p>
+
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Die</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">roll</span>
+    @numberShowing = <span class="L2Pnumber">1</span> + rand(<span class="L2Pnumber">6</span>)
+  <span class="L2Pkeyword">end</span>
+
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">showing</span>
+    @numberShowing
+  <span class="L2Pkeyword">end</span>
+  
+<span class="L2Pkeyword">end</span>
+
+<span class="L2Pcomment">#  Since I'm not going to use this die again,</span>
+<span class="L2Pcomment">#  I don't need to save it in a variable.</span>
+
+puts Die.new.showing</pre>
+        <pre class="L2PoutputBlock">
+nil
+</pre>
+        <p>
+                Hmmm... well, at least it didn't give us an error.  Still,
+      it doesn't really make sense for a die to be "unrolled", or
+      whatever <span class="L2Pcode L2PcodeBG" style="padding-right: 3px; padding-left: 3px;">nil</span> is supposed to mean here.  It would
+      be nice if we could set up our new die object right when it's
+      created.  That's what <span class="L2Pcode">initialize</span> is for:
+
+        </p>
+
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Die</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">initialize</span>
+    <span class="L2Pcomment">#  I'll just roll the die, though we</span>
+    <span class="L2Pcomment">#  could do something else if we wanted</span>
+    <span class="L2Pcomment">#  to, like setting the die with 6 showing.</span>
+
+    roll
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">roll</span>
+    @numberShowing = <span class="L2Pnumber">1</span> + rand(<span class="L2Pnumber">6</span>)
+  <span class="L2Pkeyword">end</span>
+
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">showing</span>
+    @numberShowing
+  <span class="L2Pkeyword">end</span>
+  
+<span class="L2Pkeyword">end</span>
+
+puts Die.new.showing</pre>
+        <pre class="L2PoutputBlock">
+
+6
+</pre>
+        <p>
+                When an object is created, its <span class="L2Pcode">initialize</span>
+      method (if it has one defined) is always called.
+
+        </p>
+        <p>
+                Our dice are just about perfect.  The only thing that
+      might be missing is a way to set which side of a die
+      is showing... why don't you write a <span class="L2Pcode">cheat</span>
+
+      method which does just that!  Come back when you're
+      done (and when you tested that it worked, of course).
+      Make sure that someone can't set the die to have a
+      <span class="L2Pcode"><span class="L2Pnumber">7</span></span> showing!
+
+        </p>
+        <p>
+                So that's some pretty cool stuff we just covered.  It's tricky,
+      though, so let me give another, more interesting example.
+      Let's say we want to make a simple virtual pet, a baby
+      dragon.  Like most babies, it should be able to eat, sleep,
+      and poop, which means we will need to be able to feed it,
+      put it to bed, and take it on walks.  Internally, our dragon
+      will need to keep track of if it is hungry, tired, or needs
+      to go, but we won't be able to see that when we interact
+      with our dragon, just like you can't ask a human baby,
+      "Are you hungry?".  We'll also add a few other fun ways
+      we can interact with our baby dragon, and when he is born
+      we'll give him a name.  (Whatever you pass into the
+      <span class="L2Pcode">new</span> method is passed into the <span class="L2Pcode">initialize</span>
+      method for you.)  Alright, let's give it a shot:
+
+        </p>
+
+        <pre class="L2PcodeBlock"><span class="L2Pkeyword">class</span> <span class="L2Pdefinition">Dragon</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">initialize</span> name
+    @name = name
+    @asleep = <span class="L2Pkeyword">false</span>
+    @stuffInBelly     = <span class="L2Pnumber">10</span>  <span class="L2Pcomment">#  He's full.</span>
+
+    @stuffInIntestine =  <span class="L2Pnumber">0</span>  <span class="L2Pcomment">#  He doesn't need to go.</span>
+    
+    puts @name + '<span class="L2Pstring"> is born.</span>'
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">feed</span>
+
+    puts '<span class="L2Pstring">You feed </span>' + @name + '<span class="L2Pstring">.</span>'
+    @stuffInBelly = <span class="L2Pnumber">10</span>
+    passageOfTime
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">walk</span>
+
+    puts '<span class="L2Pstring">You walk </span>' + @name + '<span class="L2Pstring">.</span>'
+    @stuffInIntestine = <span class="L2Pnumber">0</span>
+    passageOfTime
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">putToBed</span>
+
+    puts '<span class="L2Pstring">You put </span>' + @name + '<span class="L2Pstring"> to bed.</span>'
+    @asleep = <span class="L2Pkeyword">true</span>
+    <span class="L2Pnumber">3</span>.times <span class="L2Pkeyword">do</span>
+      <span class="L2Pkeyword">if</span> @asleep
+        passageOfTime
+      <span class="L2Pkeyword">end</span>
+
+      <span class="L2Pkeyword">if</span> @asleep
+        puts @name + '<span class="L2Pstring"> snores, filling the room with smoke.</span>'
+      <span class="L2Pkeyword">end</span>
+    <span class="L2Pkeyword">end</span>
+    <span class="L2Pkeyword">if</span> @asleep
+      @asleep = <span class="L2Pkeyword">false</span>
+
+      puts @name + '<span class="L2Pstring"> wakes up slowly.</span>'
+    <span class="L2Pkeyword">end</span>
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">toss</span>
+    puts '<span class="L2Pstring">You toss </span>' + @name + '<span class="L2Pstring"> up into the air.</span>'
+    puts '<span class="L2Pstring">He giggles, which singes your eyebrows.</span>'
+    passageOfTime
+  <span class="L2Pkeyword">end</span>
+
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">rock</span>
+    puts '<span class="L2Pstring">You rock </span>' + @name + '<span class="L2Pstring"> gently.</span>'
+    @asleep = <span class="L2Pkeyword">true</span>
+    puts '<span class="L2Pstring">He briefly dozes off...</span>'
+    passageOfTime
+    <span class="L2Pkeyword">if</span> @asleep
+      @asleep = <span class="L2Pkeyword">false</span>
+
+      puts '<span class="L2Pstring">...but wakes when you stop.</span>'
+    <span class="L2Pkeyword">end</span>
+  <span class="L2Pkeyword">end</span>
+  
+  private
+  
+  <span class="L2Pcomment">#  &quot;private&quot; means that the methods defined here are</span>
+  <span class="L2Pcomment">#  methods internal to the object.  (You can feed</span>
+
+  <span class="L2Pcomment">#  your dragon, but you can't ask him if he's hungry.)</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">hungry?</span>
+    <span class="L2Pcomment">#  Method names can end with &quot;?&quot;.</span>
+    <span class="L2Pcomment">#  Usually, we only do this if the method</span>
+    <span class="L2Pcomment">#  returns true or false, like this:</span>
+
+    @stuffInBelly &lt;= <span class="L2Pnumber">2</span>
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">poopy?</span>
+    @stuffInIntestine &gt;= <span class="L2Pnumber">8</span>
+
+  <span class="L2Pkeyword">end</span>
+  
+  <span class="L2Pkeyword">def</span> <span class="L2Pdefinition">passageOfTime</span>
+    <span class="L2Pkeyword">if</span> @stuffInBelly &gt; <span class="L2Pnumber">0</span>
+      <span class="L2Pcomment">#  Move food from belly to intestine.</span>
+
+      @stuffInBelly     = @stuffInBelly     - <span class="L2Pnumber">1</span>
+      @stuffInIntestine = @stuffInIntestine + <span class="L2Pnumber">1</span>
+    <span class="L2Pkeyword">else</span>  <span class="L2Pcomment">#  Our dragon is starving!</span>
+      <span class="L2Pkeyword">if</span> @asleep
+        @asleep = <span class="L2Pkeyword">false</span>
+
+        puts '<span class="L2Pstring">He wakes up suddenly!</span>'
+      <span class="L2Pkeyword">end</span>
+      puts @name + '<span class="L2Pstring"> is starving!  In desperation, he ate YOU!</span>'
+      exit  <span class="L2Pcomment">#  This quits the program.</span>
+    <span class="L2Pkeyword">end</span>
+    
+    <span class="L2Pkeyword">if</span> @stuffInIntestine &gt;= <span class="L2Pnumber">10</span>
+
+      @stuffInIntestine = <span class="L2Pnumber">0</span>
+      puts '<span class="L2Pstring">Whoops!  </span>' + @name + '<span class="L2Pstring"> had an accident...</span>'
+    <span class="L2Pkeyword">end</span>
+    
+    <span class="L2Pkeyword">if</span> hungry?
+      <span class="L2Pkeyword">if</span> @asleep
+        @asleep = <span class="L2Pkeyword">false</span>
+
+        puts '<span class="L2Pstring">He wakes up suddenly!</span>'
+      <span class="L2Pkeyword">end</span>
+      puts @name + '<span class="L2Pstring">\'s stomach grumbles...</span>'
+    <span class="L2Pkeyword">end</span>
+    
+    <span class="L2Pkeyword">if</span> poopy?
+      <span class="L2Pkeyword">if</span> @asleep
+        @asleep = <span class="L2Pkeyword">false</span>
+
+        puts '<span class="L2Pstring">He wakes up suddenly!</span>'
+      <span class="L2Pkeyword">end</span>
+      puts @name + '<span class="L2Pstring"> does the potty dance...</span>'
+    <span class="L2Pkeyword">end</span>
+  <span class="L2Pkeyword">end</span>
+  
+
+<span class="L2Pkeyword">end</span>
+
+pet = Dragon.new '<span class="L2Pstring">Norbert</span>'
+pet.feed
+pet.toss
+pet.walk
+pet.putToBed
+pet.rock
+pet.putToBed
+pet.putToBed
+pet.putToBed
+pet.putToBed</pre>
+        <pre class="L2PoutputBlock">
+Norbert is born.
+You feed Norbert.
+You toss Norbert up into the air.
+He giggles, which singes your eyebrows.
+You walk Norbert.
+You put Norbert to bed.
+Norbert snores, filling the room with smoke.
+Norbert snores, filling the room with smoke.
+Norbert snores, filling the room with smoke.
+Norbert wakes up slowly.
+You rock Norbert gently.
+He briefly dozes off...
+...but wakes when you stop.
+You put Norbert to bed.
+He wakes up suddenly!
+Norbert's stomach grumbles...
+You put Norbert to bed.
+He wakes up suddenly!
+Norbert's stomach grumbles...
+You put Norbert to bed.
+He wakes up suddenly!
+Norbert's stomach grumbles...
+Norbert does the potty dance...
+You put Norbert to bed.
+He wakes up suddenly!
+Norbert is starving!  In desperation, he ate YOU!
+</pre>
+        <p>
+                <em>Whew!</em>  Of course, it would be nicer if this was
+      an interactive program, but you can do that part later.
+      I was just trying to show the parts directly relating to
+      creating a new dragon class.
+
+        </p>
+
+        <p>
+                We saw a few new things in that example.  The first is
+      simple:  <span class="L2Pcode">exit</span> terminates the program right
+      then and there.  The second is the word <span class="L2Pcode">private</span>
+      which we stuck right in the middle of our class definition.
+      I could have left it out, but I wanted to enforce the idea
+      of certain methods being things you can do to a dragon, and
+      others which simply happen within the dragon.  You can think
+      of these as being "under the hood":  unless you are an
+      automobile mechanic, all you really need to know is the gas
+      pedal, the brake pedal, and the steering wheel.  A programmer
+      might call those the <dfn>public interface</dfn> to your car.
+      How your airbag knows when to deploy, however, is internal to
+      the car; the typical user (driver) doesn't need to know about
+      this.
+
+        </p>
+        <p>
+
+                Actually, for a bit more concrete example along those lines,
+      let's talk about how you might represent a car in a video
+      game (which happens to be my line of work).  First, you would
+      want to decide what you want your public interface to look like;
+      in other words, which methods should people be able to call on
+      one of your car objects?  Well, they need to be able to push
+      the gas pedal and the brake pedal, but they would also need to
+      be able to specify how hard they are pushing the pedal.  (There's
+      a big difference between flooring it and tapping it.)  They would
+      also need to be able to steer, and again, they would need to be
+      able to say how hard they are turning the wheel.  I suppose you
+      could go further and add a clutch, turn signals, rocket launcher,
+      afterburner, flux capacitor, etc... it depends
+      on what type of game you are making.
+
+        </p>
+        <p>
+                Internal to a car object, though, there would need to be much
+      more going on; other things a car would need are a speed,
+      a direction, and a position (at the most basic).  These attributes
+      would be modified by pressing on the gas or brake pedals and
+      turning the wheel, of course, but the user would not be able
+      to set the position directly (which would be like warping).
+      You might also want to keep track of skidding or damage, if
+      you have caught any air, and so on.  These would all be internal
+      to your car object.
+
+        </p>
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+                &bull; Make an <span class="L2Pcode">OrangeTree</span> class.  It should have a
+      <span class="L2Pcode">height</span> method which returns its height, and a
+      <span class="L2Pcode">oneYearPasses</span> method, which, when called, ages the tree
+      one year.  Each year the tree grows taller (however much you think
+      an orange tree should grow in a year), and after some number of
+      years (again, your call) the tree should die.  For the first few
+      years, it should not produce fruit, but after a while it should,
+      and I guess that older trees produce more each year than younger
+      trees... whatever you think makes most sense.  And, of course,
+      you should be able to <span class="L2Pcode">countTheOranges</span> (which returns
+      the number of oranges on the tree), and <span class="L2Pcode">pickAnOrange</span>
+
+      (which reduces the <span class="L2Pcode">@orangeCount</span> by one and returns a
+      string telling you how delicious the orange was, or else it just
+      tells you that there are no more oranges to pick this year).
+      Make sure that any oranges you don't pick one year fall off
+      before the next year.
+
+        </p>
+        <p>
+                &bull; Write a program so that you can interact with your
+      baby dragon.  You should be able to enter commands like
+      <span class="L2Pinput">feed</span> and <span class="L2Pinput">walk</span>, and have those methods
+      be called on your dragon.  Of course, since what you are
+      inputting are just strings, you will have to have some sort
+      of <dfn>method dispatch</dfn>, where your program checks
+      which string was entered, and then calls the appropriate method.
+
+        </p>
+
+        <p>
+                And that's just about all there is to it!  But wait a second...
+      I haven't told you about any of those classes for doing things
+      like sending an email, or saving and loading files on your
+      computer, or how to create windows and buttons, or 3D worlds,
+      or anything!  Well, there are just <em>so many</em> classes
+      you can use that I can't possibly show you them all; I don't
+      even know what most of them are!  What I <em>can</em> tell
+      you is where to find out more about them, so you can learn
+      about the ones you want to program with.  Before I send you
+      off, though, there is just one more feature of Ruby you should
+      know about, something most languages don't have, but which I
+      simply could not live without:
+      <a href="/LearnToProgram/?Chapter=10">blocks and procs</a>.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p style="padding-bottom: 20px;">
+
+          &copy; 2003-2009 Chris Pine
+        </p>
+      </div>

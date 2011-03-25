@@ -1,0 +1,356 @@
+      <div id="contentPane">
+
+        <h1>
+          7.&nbsp;&nbsp;Arrays and Iterators
+        </h1>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p>
+                Let's write a program which asks us to type in as many words
+      as we want (one word per line, continuing until we just press
+      <kbd>Enter</kbd> on an empty line), and which then repeats
+      the words back to us in alphabetical order.  OK?
+
+        </p>
+        <p>
+
+                So... first we'll&mdash;uh... um... hmmm...  Well, we could&mdash;er...
+      um...
+
+        </p>
+        <p>
+                You know, I don't think we can do it.  We need a way to store
+      an unknown amount of words, and how to keep track of them all
+      together, so they don't get mixed up with other variables.  We
+      need to put them in some sort of a list.  We need <dfn>arrays</dfn>.
+
+        </p>
+        <p>
+                An array is just a list in your computer.  Every slot in
+      the list acts like a variable:  you can see what object
+      a particular slot points to, and you can make it point to a
+      different object.  Let's take a look at some arrays:
+
+        </p>
+
+        <pre class="L2PcodeBlock">[]
+[<span class="L2Pnumber">5</span>]
+['<span class="L2Pstring">Hello</span>', '<span class="L2Pstring">Goodbye</span>']
+
+flavor = '<span class="L2Pstring">vanilla</span>'             <span class="L2Pcomment">#  This is not an array, of course...</span>
+[<span class="L2Pnumber">89.9</span>, flavor, [<span class="L2Pkeyword">true</span>, <span class="L2Pkeyword">false</span>]]  <span class="L2Pcomment">#  ...but this is.</span></pre>
+
+        <p>
+                So first we have an empty array, then an array holding
+      a single number, then an array holding two strings.
+      Next, we have a simple assignment; then an
+      array holding three objects, the last
+      of which is the array <span class="L2Pcode">[<span class="L2Pkeyword">true</span>,&nbsp;<span class="L2Pkeyword">false</span>]</span>.  Remember,
+      variables aren't objects, so our last array is really
+      pointing to float, a <em>string</em>, and an array.  Even if we
+      were to set <span class="L2Pcode">flavor</span> to
+      point to something else, that wouldn't change the
+      array.
+
+        </p>
+        <p>
+
+                To help us find a particular object in an array, each
+      slot is given an index number.  Programmers (and, incidentally,
+      most mathematicians) start counting from zero, though,
+      so the first slot in the array is slot zero.  Here's
+      how we would reference the objects in an array:
+
+        </p>
+        <pre class="L2PcodeBlock">names = ['<span class="L2Pstring">Ada</span>', '<span class="L2Pstring">Belle</span>', '<span class="L2Pstring">Chris</span>']
+
+puts names
+puts names[<span class="L2Pnumber">0</span>]
+puts names[<span class="L2Pnumber">1</span>]
+puts names[<span class="L2Pnumber">2</span>]
+puts names[<span class="L2Pnumber">3</span>]  <span class="L2Pcomment">#  This is out of range.</span></pre>
+
+        <pre class="L2PoutputBlock">
+Ada
+Belle
+Chris
+Ada
+Belle
+Chris
+nil
+</pre>
+        <p>
+                So, we see that <span class="L2Pcode">puts&nbsp;names</span> prints each name in
+      the array <span class="L2Pcode">names</span>.  Then we use <span class="L2Pcode">puts&nbsp;names[<span class="L2Pnumber">0</span>]</span>
+
+      to print out the "first" name in the array, and
+      <span class="L2Pcode">puts&nbsp;names[<span class="L2Pnumber">1</span>]</span> to print the "second"... I'm sure this seems
+      confusing, but you <em>do</em> get used to it.  You just have to really
+      start <em>thinking</em> that counting begins at zero, and
+      stop using words like "first" and "second".
+      If you go out to a five-course meal, don't talk about
+      the "first" course; talk about course zero
+      (and in your head, be thinking <span class="L2Pcode">course[<span class="L2Pnumber">0</span>]</span>).
+      You have five fingers on your right hand, and their
+      numbers are 0, 1, 2, 3, and 4.  My wife and I are
+      jugglers.  When we juggle six clubs, we are juggling
+      clubs 0-5.  Hopefully in the next few months, we'll
+      be able to juggle club 6 (and thus be juggling seven
+      clubs between us).  You'll know you've got it when you
+      start using the word "zeroth".  :-) Yes, it's a real
+      word; ask any programmer or mathematician.
+
+        </p>
+
+        <p>
+                Finally, we tried <span class="L2Pcode">puts&nbsp;names[<span class="L2Pnumber">3</span>]</span>, just to see what
+      would happen.  Were you expecting an error?  Sometimes when
+      you ask a question, your question doesn't make sense (at
+      least to your computer); that's when you get an error.
+      Sometimes, however, you can ask a question and the answer
+      is <em>nothing</em>.  What's in slot three?  Nothing.
+      What is <span class="L2Pcode">names[<span class="L2Pnumber">3</span>]</span>?  <span class="L2Pcode"><span class="L2Pkeyword">nil</span></span>:  Ruby's way
+      of saying "nothing".  <span class="L2Pcode"><span class="L2Pkeyword">nil</span></span> is a special object
+      which basically means "not any other object."
+
+        </p>
+
+        <p>
+                If all this funny numbering of array slots is getting to
+      you, fear not!  Often, we can avoid them completely by
+      using various array methods, like this one:
+
+        </p>
+        <h2>
+          The Method <span class="L2Pcode">each</span>
+        </h2>
+        <p>
+                <span class="L2Pcode">each</span> allows us to do something (whatever we
+      want) to <span class="L2Pcode">each</span> object the array points to.  So, if we
+      want to say something nice about each language in the array
+      below, we'd do this:
+
+        </p>
+
+        <pre class="L2PcodeBlock">languages = ['<span class="L2Pstring">English</span>', '<span class="L2Pstring">German</span>', '<span class="L2Pstring">Ruby</span>']
+
+languages.each <span class="L2Pkeyword">do</span> |lang|
+  puts '<span class="L2Pstring">I love </span>' + lang + '<span class="L2Pstring">!</span>'
+  puts '<span class="L2Pstring">Don\'t you?</span>'
+
+<span class="L2Pkeyword">end</span>
+
+puts '<span class="L2Pstring">And let\'s hear it for C++!</span>'
+puts '<span class="L2Pstring">...</span>'</pre>
+        <pre class="L2PoutputBlock">
+I love English!
+Don't you?
+I love German!
+Don't you?
+I love Ruby!
+Don't you?
+And let's hear it for C++!
+...
+</pre>
+        <p>
+                So what just happened?  Well, we were able to go through
+      every object in the array without using any numbers, so
+      that's definitely nice.  Translating into English, the above
+      program reads something like:  For <span class="L2Pcode">each</span> object
+      in <span class="L2Pcode">languages</span>, point the variable <span class="L2Pcode">lang</span>
+
+      to the object and then <span class="L2Pcode"><span class="L2Pkeyword">do</span></span> everything I tell you to,
+      until you come to the <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>.  (Just so you know,
+      C++ is another programming language.  It's much harder to
+      learn than Ruby; usually, a C++ program will be many times
+      longer than a Ruby program which does the same thing.)
+
+        </p>
+        <p>
+                You might be thinking to yourself, "This is a lot like
+      the loops we learned about earlier."  Yep, it's similar.
+      One important difference is that the method <span class="L2Pcode">each</span>
+      is just that:  a method.  <span class="L2Pcode"><span class="L2Pkeyword">while</span></span> and <span class="L2Pcode"><span class="L2Pkeyword">end</span></span>
+
+      (much like <span class="L2Pcode"><span class="L2Pkeyword">do</span></span>, <span class="L2Pcode"><span class="L2Pkeyword">if</span></span>, <span class="L2Pcode"><span class="L2Pkeyword">else</span></span>, and all the other
+      <span class="L2Pcode"><span class="L2Pkeyword">blue</span></span>
+      words) are not methods.  They are a fundamental part of the Ruby
+      language, just like <span class="L2Pcode">=</span> and parentheses; kind of
+      like punctuation marks in English.
+
+        </p>
+        <p>
+
+                But not <span class="L2Pcode">each</span>; <span class="L2Pcode">each</span> is just another
+      array method.  Methods like <span class="L2Pcode">each</span> which "act like"
+      loops are often called <dfn>iterators</dfn>.
+
+        </p>
+        <p>
+                One thing to notice about iterators is that they are
+      always followed by <span class="L2Pcode"><span class="L2Pkeyword">do</span></span>...<span class="L2Pcode"><span class="L2Pkeyword">end</span></span>.
+      <span class="L2Pcode"><span class="L2Pkeyword">while</span></span> and <span class="L2Pcode"><span class="L2Pkeyword">if</span></span> never had a <span class="L2Pcode"><span class="L2Pkeyword">do</span></span>
+
+      near them; we only use <span class="L2Pcode"><span class="L2Pkeyword">do</span></span> with iterators.
+
+        </p>
+        <p>
+                Here's another cute little iterator, but it's not an
+      array method... it's an integer method!
+
+        </p>
+        <pre class="L2PcodeBlock"><span class="L2Pnumber">3</span>.times <span class="L2Pkeyword">do</span>
+  puts '<span class="L2Pstring">Hip-Hip-Hooray!</span>'
+
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+Hip-Hip-Hooray!
+Hip-Hip-Hooray!
+Hip-Hip-Hooray!
+</pre>
+        <h2>
+          More Array Methods
+        </h2>
+        <p>
+                So we've learned <span class="L2Pcode">each</span>,
+      but there are many other array methods... almost as
+      many as there are string methods!  In fact, some of
+      them (like <span class="L2Pcode">length</span>, <span class="L2Pcode">reverse</span>,
+      <span class="L2Pcode">+</span>, and <span class="L2Pcode">*</span>)
+      work just like they do for strings, except that they
+      operate on the slots of the array rather than the
+      letters of the string.  Others, like <span class="L2Pcode">last</span>
+
+      and <span class="L2Pcode">join</span>, are specific to arrays.  Still
+      others, like <span class="L2Pcode">push</span> and <span class="L2Pcode">pop</span>,
+      actually change the array.  And just as with
+      the string methods, you don't have to remember
+      all of these, as long as you can remember where to
+      find out about them (right here).
+
+        </p>
+        <p>
+                First, let's look at <span class="L2Pcode">to_s</span> and <span class="L2Pcode">join</span>.
+      <span class="L2Pcode">join</span> works much like <span class="L2Pcode">to_s</span> does, except
+      that it adds a string in between the array's objects.
+      Let's take a look:
+
+        </p>
+
+        <pre class="L2PcodeBlock">foods = ['<span class="L2Pstring">artichoke</span>', '<span class="L2Pstring">brioche</span>', '<span class="L2Pstring">caramel</span>']
+
+puts foods
+puts
+puts foods.to_s
+puts
+puts foods.join('<span class="L2Pstring">, </span>')
+puts
+puts foods.join('<span class="L2Pstring">  :)  </span>') + '<span class="L2Pstring">  8)</span>'
+
+<span class="L2Pnumber">200</span>.times <span class="L2Pkeyword">do</span>
+
+  puts []
+<span class="L2Pkeyword">end</span></pre>
+        <pre class="L2PoutputBlock">
+artichoke
+brioche
+caramel
+
+artichokebriochecaramel
+
+artichoke, brioche, caramel
+
+artichoke  :)  brioche  :)  caramel  8)
+</pre>
+        <p>
+                As you can see, <span class="L2Pcode">puts</span> treats arrays differently
+      from other objects:  it just calls <span class="L2Pcode">puts</span> on each
+      of the objects in the array.  That's why <span class="L2Pcode">puts</span>ing
+      an empty array 200 times doesn't do anything; the array doesn't
+      point to anything, so there's nothing to <span class="L2Pcode">puts</span>.  (Doing
+      nothing 200 times is still doing nothing.)
+      Try <span class="L2Pcode">puts</span>ing an array containing other arrays;
+      does it do what you expected?
+
+        </p>
+
+        <p>
+                Also, did you notice that I left out the empty strings when
+      I wanted to <span class="L2Pcode">puts</span> a blank line?  It does the same
+      thing.
+
+        </p>
+        <p>
+                Now let's take a look at <span class="L2Pcode">push</span>, <span class="L2Pcode">pop</span>,
+      and <span class="L2Pcode">last</span>.  The methods <span class="L2Pcode">push</span> and <span class="L2Pcode">pop</span>
+
+      are sort of opposites,
+      like <span class="L2Pcode">+</span> and <span class="L2Pcode">-</span> are.  <span class="L2Pcode">push</span> adds
+      an object to the end of your array, and <span class="L2Pcode">pop</span>
+      removes the last object from the array (and tell you
+      what it was).  <span class="L2Pcode">last</span> is similar to <span class="L2Pcode">pop</span>
+
+      in that it tells you what's at the end of the array,
+      except that it leaves the array alone.
+      Again, <span class="L2Pcode">push</span> and <span class="L2Pcode">pop</span> <em>actually
+      change the array</em>:
+
+        </p>
+        <pre class="L2PcodeBlock">favorites = []
+favorites.push '<span class="L2Pstring">raindrops on roses</span>'
+favorites.push '<span class="L2Pstring">whiskey on kittens</span>'
+
+puts favorites[<span class="L2Pnumber">0</span>]
+puts favorites.last
+puts favorites.length
+
+puts favorites.pop
+puts favorites
+puts favorites.length</pre>
+
+        <pre class="L2PoutputBlock">
+raindrops on roses
+whiskey on kittens
+2
+whiskey on kittens
+raindrops on roses
+1
+</pre>
+        <h2>
+          A Few Things to Try
+        </h2>
+        <p>
+                &bull; Write the program we talked about at the very beginning
+      of this chapter.<br />
+      <em><strong>Hint:</strong>  There's a lovely
+      array method which will give you a sorted version of an
+      array:  </em><span class="L2Pcode">sort</span><em>.  Use it!</em>
+
+        </p>
+        <p>
+                &bull; Try writing the above program <em>without</em> using
+      the <span class="L2Pcode">sort</span> method.  A large part of programming is
+      solving problems, so get all the practice you can!
+
+        </p>
+        <p>
+
+                &bull; Rewrite your Table of Contents program (from the chapter
+      on <a href="/LearnToProgram/?Chapter=05">methods</a>).  Start the program
+      with an array holding all of the information for your Table
+      of Contents (chapter names, page numbers, etc.).  Then print
+      out the information from the array in a beautifully formatted
+      Table of Contents.
+
+        </p>
+        <p>
+                So far we have learned quite a number of different methods.
+      Now it's time to learn how to
+      <a href="/LearnToProgram/?Chapter=08">make our own</a>.
+
+        </p>
+        <div class="fleur"><div class="fleur_stem">&nbsp;</div></div>
+        <p style="padding-bottom: 20px;">
+
+          &copy; 2003-2009 Chris Pine
+        </p>
+      </div>
